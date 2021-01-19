@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ion-service
+  labels:
+    app: ion
+spec:
+  selector:
+    app: ion
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80

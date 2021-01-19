@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ion-deployment
+  labels:
+    app: ion
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ion
+  template:
+    metadata:
+      labels:
+        app: ion
+    spec:
+      containers:
+      - name: ion
+        image: ssadcloud/rion:v1.0
+        ports:
+        - containerPort: 80
