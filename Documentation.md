@@ -48,14 +48,14 @@ Setup Kubernetes (K8s) Cluster on AWS
 What is kops?
 ================================================================
 We like to think of it as kubectl for clusters
-Easiest way to get a productpd grade Kubernetes cluster up and running
+Easiest way to get a production grade Kubernetes cluster up and running
 kops helps you create, destroy, upgrade and maintain productpd-grade, highly available,Kubernetes clusters from the command line
 AWS (Amazon Web Services) is currently officially supported
 
 ================================================================
 What we need to get started ?
 ================================================================
- - An S3 bucket required to store kops sesspds state
+ - An S3 bucket required to store kops sessions state
  - To run kops, an EC2 Instance is required
  - kops does create/manage EC2 Instances(Kube Master and Nodes),IAM Roles (for Kube Master and Nodes), Route53
  - IAM Role with FUllAccess to EC2 || S3 || IAM || Route53 || VPC
@@ -67,7 +67,7 @@ What we need to get started ?
 Steps to be followed
 ================================================================
 
-1.    To store all the sesspds for Kubernetes State,we need to Create an S3 bucket
+1.    To store all the sessions for Kubernetes State,we need to Create an S3 bucket
       Create an S3 bucket, ex: <<kub-pd-bucket-us-east-2>>
 
 2.    Create an IAM role with IAM,EC2,S3 and Route53 Full access(k8-role)
@@ -82,8 +82,8 @@ Steps to be followed
       # https://kubernetes.io/docs/setup/productpd-environment/tools/kops/
 
 6.    Move to AWS account,Create a Route53 Private hosted zone,
-      Private Domain Name: thessadcloud.net
-            ex: thessadcloud.net
+      Private Domain Name: ancoritsolution.com
+            ex: ancoritsolution.com
 
 7.    Expose environment variable:
             $ export KOPS_STATE_STORE=s3://kub-pd-bucket-us-east-2
@@ -93,7 +93,7 @@ Steps to be followed
             $ ssh-keygen
 
 9.   Create kubernetes cluster,for Private Hosted zone
-            $ kops create cluster --cloud=aws --zones=us-east-2a,us-east-2b --name=kub.pd-app.thessadcloud.net --dns-zone=thessadcloud.net --dns private --yes
+            $ kops create cluster --cloud=aws --zones=us-east-2a,us-east-2b --name=kub.pd-app.ancoritsolution.com --dns-zone=ancoritsolution.com --dns private --yes
 
 11.   To Validate your cluster
             $ kops validate cluster
@@ -130,4 +130,4 @@ Steps to be followed
       Note: Enable required <port-num> in Security groups for Master Node
 
 23.   To delete cluster
-            $ kops delete cluster kub.pd-app.thessadcloud.net --yes
+            $ kops delete cluster kub.pd-app.ancoritsolution.com --yes
