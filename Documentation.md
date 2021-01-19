@@ -109,7 +109,7 @@ Steps to be followed
             $ docker build -t <docker-id>/<name-of-the-repo>:<verspd>
             $ docker push <docker-id>/<name-of-the-repo>:<verspd>
 
-15.   Create a Deployments for applicatpd
+15.   Create a Deployments for application
             $ vi pd-deployment.yaml
             $ kubectl apply -f pd-deployment.yaml
 
