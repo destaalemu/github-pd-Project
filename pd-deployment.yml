@@ -1,21 +1,21 @@
-apiVersion: apps/v1
+apiVerspd: apps/v1
 kind: Deployment
 metadata:
-  name: ion-deployment
+  name: pd-deployment
   labels:
-    app: ion
+    app: pd
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: ion
+      app: pd
   template:
     metadata:
       labels:
-        app: ion
+        app: pd
     spec:
       containers:
-      - name: ion
-        image: ssadcloud/rion:v1.0
+      - name: pd
+        image: ssadcloud/rpd:v1.0
         ports:
         - containerPort: 80

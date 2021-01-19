@@ -25,9 +25,9 @@ Scenario: Running Docker on AWS EC2 Instances
 2.3  Create a github repo that and clone it to local-setup
 					git clone https://github.com/<githubaccountname>/<githubrepo-for-docker>
 					cd <githubrepo-for-docker>
-					docker build -t <name-of-docker-image>:<tags/version> .														// To build docker images
+					docker build -t <name-of-docker-image>:<tags/verspd> .														// To build docker images
 					docker images    																																	// listing the docker
-					docker run -p <host-port>:<docker-port>:<name-of-docker-image>:<tags/version>			// To run docker containers
+					docker run -p <host-port>:<docker-port>:<name-of-docker-image>:<tags/verspd>			// To run docker containers
 
 2.4  Create a dockerhub repo under hub.docker.com and push images to dockerhub
 					docker login
@@ -48,14 +48,14 @@ Setup Kubernetes (K8s) Cluster on AWS
 What is kops?
 ================================================================
 We like to think of it as kubectl for clusters
-Easiest way to get a production grade Kubernetes cluster up and running
-kops helps you create, destroy, upgrade and maintain production-grade, highly available,Kubernetes clusters from the command line
+Easiest way to get a productpd grade Kubernetes cluster up and running
+kops helps you create, destroy, upgrade and maintain productpd-grade, highly available,Kubernetes clusters from the command line
 AWS (Amazon Web Services) is currently officially supported
 
 ================================================================
 What we need to get started ?
 ================================================================
- - An S3 bucket required to store kops sessions state
+ - An S3 bucket required to store kops sesspds state
  - To run kops, an EC2 Instance is required
  - kops does create/manage EC2 Instances(Kube Master and Nodes),IAM Roles (for Kube Master and Nodes), Route53
  - IAM Role with FUllAccess to EC2 || S3 || IAM || Route53 || VPC
@@ -67,33 +67,33 @@ What we need to get started ?
 Steps to be followed
 ================================================================
 
-1.    To store all the sessions for Kubernetes State,we need to Create an S3 bucket
-      Create an S3 bucket, ex: <<kub-ion-bucket-us-east-2>>
+1.    To store all the sesspds for Kubernetes State,we need to Create an S3 bucket
+      Create an S3 bucket, ex: <<kub-pd-bucket-us-east-2>>
 
 2.    Create an IAM role with IAM,EC2,S3 and Route53 Full access(k8-role)
 
 3.    Create an EC2 instance with {k8-role},which has ability to create/delete/manage
-      EC2 Instances|| S3 Buckets || Domain Resolution (Route53) || Roles for EC2 machices
+      EC2 Instances|| S3 Buckets || Domain Resolutpd (Route53) || Roles for EC2 machices
 
 4.    For Kubernetes to work with CLI, will need to install kubectl on ubuntu instance
-      # https://kubernetes.io/docs/setup/production-environment/tools/kops/
+      # https://kubernetes.io/docs/setup/productpd-environment/tools/kops/
 
 5.    To Install kops on Ubuntu instance
-      # https://kubernetes.io/docs/setup/production-environment/tools/kops/
+      # https://kubernetes.io/docs/setup/productpd-environment/tools/kops/
 
 6.    Move to AWS account,Create a Route53 Private hosted zone,
       Private Domain Name: thessadcloud.net
             ex: thessadcloud.net
 
 7.    Expose environment variable:
-            $ export KOPS_STATE_STORE=s3://kub-ion-bucket-us-east-2
+            $ export KOPS_STATE_STORE=s3://kub-pd-bucket-us-east-2
 
 8.   Master node will need to interact with Kube Node, hence we need a secret key to be created on Master node
       Create sshkeys before creating cluster
             $ ssh-keygen
 
 9.   Create kubernetes cluster,for Private Hosted zone
-            $ kops create cluster --cloud=aws --zones=us-east-2a,us-east-2b --name=kub.ion-app.thessadcloud.net --dns-zone=thessadcloud.net --dns private --yes
+            $ kops create cluster --cloud=aws --zones=us-east-2a,us-east-2b --name=kub.pd-app.thessadcloud.net --dns-zone=thessadcloud.net --dns private --yes
 
 11.   To Validate your cluster
             $ kops validate cluster
@@ -106,16 +106,16 @@ Steps to be followed
 
 14.   Building Docker images
             $ docker login
-            $ docker build -t <docker-id>/<name-of-the-repo>:<version>
-            $ docker push <docker-id>/<name-of-the-repo>:<version>
+            $ docker build -t <docker-id>/<name-of-the-repo>:<verspd>
+            $ docker push <docker-id>/<name-of-the-repo>:<verspd>
 
-15.   Create a Deployments for application
-            $ vi ion-deployment.yaml
-            $ kubectl apply -f ion-deployment.yaml
+15.   Create a Deployments for applicatpd
+            $ vi pd-deployment.yaml
+            $ kubectl apply -f pd-deployment.yaml
 
 16.   Create service for the deployment
-            $ vi ion-service.yaml
-            $ kubectl apply -f ion-service.yaml
+            $ vi pd-service.yaml
+            $ kubectl apply -f pd-service.yaml
 
 17.   To list deployments
             $ kubectl get deployments
@@ -130,4 +130,4 @@ Steps to be followed
       Note: Enable required <port-num> in Security groups for Master Node
 
 23.   To delete cluster
-            $ kops delete cluster kub.ion-app.thessadcloud.net --yes
+            $ kops delete cluster kub.pd-app.thessadcloud.net --yes

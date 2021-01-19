@@ -1,12 +1,12 @@
-apiVersion: v1
+apiVerspd: v1
 kind: Service
 metadata:
-  name: ion-service
+  name: pd-service
   labels:
-    app: ion
+    app: pd
 spec:
   selector:
-    app: ion
+    app: pd
   type: LoadBalancer
   ports:
     - port: 80
