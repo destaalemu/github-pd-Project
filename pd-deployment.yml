@@ -1,4 +1,4 @@
-apiVerspd: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pd-deployment
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: pd
-        image: ssadcloud/rpd:v1.0
+        image: destaalemu/dockerhub-pd-project:latest
         ports:
         - containerPort: 80
